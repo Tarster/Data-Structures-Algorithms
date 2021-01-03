@@ -16,7 +16,7 @@ int StaticRecursion(int n)
 }
 
 
-//Main for calling both the functions
+//Main for calling the functions
 int main()
 {
     int m = 6;
