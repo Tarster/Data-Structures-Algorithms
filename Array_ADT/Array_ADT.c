@@ -25,7 +25,7 @@ struct ARRAY_ADT
 
 /* -------------------------------HELPER FUNCTIONS----------------------------------------*/
 //To check if index or length input is out of range or not.
-bool OutofRange(size, check)
+bool OutofRange(int size, int check)
 {
     if(check > size || check < 0)
         return true;
