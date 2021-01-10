@@ -50,7 +50,7 @@ struct ARRAY_ADT init()
     //Creating the pointer for the Array;
     Array.A = (int*) malloc(Array.size * sizeof(int));
 
-    printf("Please enter the values in the arry: ");
+    printf("Please enter the values in the array: ");
     for(int i = 0; i < Array.len; i++)
     {
         scanf("%d", &Array.A[i]);
@@ -70,14 +70,58 @@ void display( struct ARRAY_ADT Array)
     }
 }
 
-void add()
+void add(struct ARRAY_ADT *Array) // I am getting the address of the struct and using it to make a call like pass by reference
 {
-    ;
+    int num;
+    printf("Enter the value to be appended: ");
+    scanf("%d", &num);
+
+    if(OutofRange(Array -> size,Array -> len))
+    {
+        printf("Array is full:");
+    }
+    else
+    {
+        Array->A[Array->len] = num;
+        Array->len++;
+    }
 }
 
-void insert()
+void insert(struct ARRAY_ADT *Array)
 {
-    ;
+    int num;
+    int index;
+    int i;
+
+    printf("Enter the value to be inserted: ");
+    scanf("%d", &num);
+
+    printf("Enter the value to be index: ");
+    scanf("%d", &index);
+
+
+    if(OutofRange(Array -> size, Array -> len))
+    {
+        printf("Array is full:");
+    }
+    else
+    {
+        if (OutofRange(Array -> size, index))
+        {
+            printf("Index is not valid");
+        }
+        else
+        {
+            for(i = Array -> len; i > index; i--);
+            {
+                printf("i++: %d  i: %d", Array -> A[i++], Array -> A[i]);
+                Array -> A[i++] = Array -> A[i];
+            }
+            Array -> A[index] = num;
+            Array -> len++;
+        }
+
+    }
 }
 
 
@@ -86,7 +130,7 @@ void insert()
 int main()
 {
     struct ARRAY_ADT Array = init();
+    insert(&Array);
     display(Array);
-
     return 0;
 }
