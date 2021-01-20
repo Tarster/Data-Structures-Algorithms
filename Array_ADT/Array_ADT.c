@@ -27,7 +27,7 @@ struct ARRAY_ADT
 //To check if index or length input is out of range or not.
 bool OutofRange(int size, int check)
 {
-    if(check > size || check < 0)
+    if(check < -1 || check > size)
         return true;
     else
         return false;
@@ -91,13 +91,15 @@ void insert(struct ARRAY_ADT *Array)
 {
     int num;
     int index;
-    int i;
+    int i = Array -> len - 1;
 
     printf("Enter the value to be inserted: ");
     scanf("%d", &num);
 
     printf("Enter the value to be index: ");
     scanf("%d", &index);
+
+    printf("Array length:%d \n", Array ->len);
 
 
     if(OutofRange(Array -> size, Array -> len))
@@ -112,11 +114,14 @@ void insert(struct ARRAY_ADT *Array)
         }
         else
         {
-            for(i = Array -> len; i > index; i--);
+            while(i >= index)
             {
-                printf("i++: %d  i: %d", Array -> A[i++], Array -> A[i]);
-                Array -> A[i++] = Array -> A[i];
+
+                printf("\t i:%d", i);
+               Array->A[i+1] = Array->A[i];
+                i--;
             }
+
             Array -> A[index] = num;
             Array -> len++;
         }
@@ -125,12 +130,12 @@ void insert(struct ARRAY_ADT *Array)
 }
 
 
-
 //Main Driving Function
 int main()
 {
     struct ARRAY_ADT Array = init();
     insert(&Array);
+    printf("\n");
     display(Array);
     return 0;
 }
