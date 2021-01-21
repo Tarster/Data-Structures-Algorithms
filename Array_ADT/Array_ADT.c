@@ -99,9 +99,6 @@ void insert(struct ARRAY_ADT *Array)
     printf("Enter the value to be index: ");
     scanf("%d", &index);
 
-    printf("Array length:%d \n", Array ->len);
-
-
     if(OutofRange(Array -> size, Array -> len))
     {
         printf("Array is full:");
@@ -116,9 +113,7 @@ void insert(struct ARRAY_ADT *Array)
         {
             while(i >= index)
             {
-
-                printf("\t i:%d", i);
-               Array->A[i+1] = Array->A[i];
+                Array->A[i+1] = Array->A[i];
                 i--;
             }
 
@@ -129,13 +124,38 @@ void insert(struct ARRAY_ADT *Array)
     }
 }
 
+void deleteElement(struct ARRAY_ADT *Array)
+{
+    int index;
+    int i = Array -> len - 1;
+
+    printf("Enter the index to be deleted: ");
+    scanf("%d", &index);
+
+    if (OutofRange(Array -> len, index))
+    {
+        printf("Index is not valid");
+    }
+    else
+    {
+        for (i = index ;i < Array -> len; i++)
+        {
+            Array->A[i] = Array->A[i+1];
+        }
+
+        Array -> len--;
+        Array -> A[Array -> len] = 0;
+    }
+}
+
+
 
 //Main Driving Function
 int main()
 {
     struct ARRAY_ADT Array = init();
-    insert(&Array);
-    printf("\n");
+    //insert(&Array);
+    deleteElement(&Array);
     display(Array);
     return 0;
 }
