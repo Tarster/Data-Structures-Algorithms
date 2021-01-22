@@ -24,6 +24,22 @@ struct ARRAY_ADT
 };
 
 /* -------------------------------HELPER FUNCTIONS----------------------------------------*/
+//For taking only integer as input
+int Integerinput()
+{
+    char *p, s[100];
+    int n;
+
+    while (fgets (s, sizeof(s), stdin))
+    {
+        n = strtol(s, &p, 10);
+        if (p == s || *p != '\n')
+            printf("Error!\n Please enter the integer value: ");
+        else
+            return n;
+    }
+}
+
 //To check if index or length input is out of range or not.
 bool OutofRange(int size, int check)
 {
@@ -39,21 +55,21 @@ struct ARRAY_ADT init()
     struct ARRAY_ADT Array;
 
     printf("Enter the size of the Array: ");
-    scanf("%d", &Array.size);
-
-    do
-    {
-        printf("Enter the length of the Array: ");
-        scanf("%d", &Array.len);
-    }while(OutofRange(Array.size,Array.len));
+    Array.size = Integerinput();
 
     //Creating the pointer for the Array;
     Array.A = (int*) malloc(Array.size * sizeof(int));
 
+    do
+    {
+        printf("Enter the length of the Array: ");
+        Array.len = Integerinput();
+    }while(OutofRange(Array.size,Array.len));
+
     printf("Please enter the values in the array: ");
     for(int i = 0; i < Array.len; i++)
     {
-        scanf("%d", &Array.A[i]);
+        Array.A[i] = Integerinput();
     }
 
     return Array;
@@ -62,7 +78,8 @@ struct ARRAY_ADT init()
 /* -------------------------------OPERATIONS----------------------------------------*/
 
 //Display Function to display the values
-void display( struct ARRAY_ADT Array)
+
+void display(struct ARRAY_ADT Array)
 {
     for(int i = 0; i < Array.len; i++)
     {
@@ -70,20 +87,21 @@ void display( struct ARRAY_ADT Array)
     }
 }
 
-void add(struct ARRAY_ADT *Array) // I am getting the address of the struct and using it to make a call like pass by reference
+void add(struct ARRAY_ADT *Array) // I am getting the address of the structure and using it to make a call like pass by reference
 {
-    int num;
-    printf("Enter the value to be appended: ");
-    scanf("%d", &num);
+    printf("%d", Array ->len+1);
 
-    if(OutofRange(Array -> size,Array -> len))
+    if(OutofRange(Array -> size , Array -> len))
     {
-        printf("Array is full:");
+        printf("Array is full");
     }
     else
     {
-        Array->A[Array->len] = num;
-        Array->len++;
+        int num;
+        printf("Enter the value to be appended: ");
+        scanf("%d", &num);
+        Array -> A[Array->len] = num;
+        Array -> len++;
     }
 }
 
@@ -154,8 +172,30 @@ void deleteElement(struct ARRAY_ADT *Array)
 int main()
 {
     struct ARRAY_ADT Array = init();
-    //insert(&Array);
-    deleteElement(&Array);
-    display(Array);
+    int choice;
+    printf("*********************************************** MENU ***********************************************");
+    printf("\n 1. Append");
+    printf("\n 2. Insert");
+    printf("\n 3. Delete");
+    printf("\n 9. Exit");
+
+    do
+    {
+        printf("\n Please Enter your choice:");
+        scanf("%d", &choice);
+        switch(choice)
+        {
+            case 1: add(&Array);
+                    break;
+            case 2: insert(&Array);
+                    break;
+            case 3: deleteElement(&Array);
+                    break;
+            case 4: display(Array);
+                    break;
+            default: printf("Wrong choice please insert a valid number");
+         }
+    }while(choice != 9);
+
     return 0;
 }
