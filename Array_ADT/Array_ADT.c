@@ -89,7 +89,7 @@ void display(struct ARRAY_ADT Array)
 
 void add(struct ARRAY_ADT *Array) // I am getting the address of the structure and using it to make a call like pass by reference
 {
-    printf("%d", Array ->len+1);
+    ("Size: %d", Array -> size);
 
     if(OutofRange(Array -> size , Array -> len))
     {
@@ -193,7 +193,9 @@ int main()
                     break;
             case 4: display(Array);
                     break;
+            case 9: break;
             default: printf("Wrong choice please insert a valid number");
+
          }
     }while(choice != 9);
 
