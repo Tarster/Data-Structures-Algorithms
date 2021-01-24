@@ -173,6 +173,8 @@ int main()
 {
     struct ARRAY_ADT Array = init();
     int choice;
+    // add the menu here and update it regularly
+    //User need to press the key
     printf("*********************************************** MENU ***********************************************");
     printf("\n 1. Append");
     printf("\n 2. Insert");
