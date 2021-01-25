@@ -141,7 +141,7 @@ void insert(struct ARRAY_ADT *Array)
 
     }
 }
-
+//This is the delete element function
 void deleteElement(struct ARRAY_ADT *Array)
 {
     int index;
