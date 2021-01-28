@@ -10,8 +10,9 @@ Array Abstract Data Type for representing Array with various functions
 4. Insert
 
 Helper Functions
-1. Out of bound check
-2. Init
+1. OutOfRange - For check if the length or provided index is out of bound
+2. init - To initialize the array
+3. Integerinput - For taking only integer inputs
 */
 
 
@@ -21,6 +22,7 @@ struct ARRAY_ADT
     int *A; // For storing the pointer to base address of the array
     int size; //For storing the size of the array
     int len; //For storing the length of the array
+    int count; //For counting actual number in the array
 };
 
 /* -------------------------------HELPER FUNCTIONS----------------------------------------*/
@@ -29,21 +31,30 @@ int Integerinput()
 {
     char *p, s[100];
     int n;
-
+    //fgets - This function will be used to take a string input and it takes 3 parameters.
+    //s - To hold the actual string that we are getting as input.
+    //sizeof(s) - It is for taking the size because it will read only till sizeof(s)-1.
+    //Conditions for termination of fgets - It stops when either (sizeof(s)-1) characters are read, the newline character is read, or the end-of-file is reached, whichever comes first.
+    //stdin - to specify the input stream.
     while (fgets (s, sizeof(s), stdin))
     {
+        //strtol - converts the initial part of the string in s to a long or int value.
+        //&p - is the parameter which is used to hold the next character after the numeric value
+        //Ex : 123abc in this case n will hold 123 and p will hold a location.
+        //third parameter is used to provide the base as for decimal we have used 10 here we can specify any value from 2 - 36 inclusive
         n = strtol(s, &p, 10);
         if (p == s || *p != '\n')
             printf("Error!\n Please enter the integer value: ");
         else
             return n;
     }
+    return -1;
 }
 
 //To check if index or length input is out of range or not.
 bool OutofRange(int size, int check)
 {
-    if(check < -1 || check > size)
+    if (check < 1 || check > size)
         return true;
     else
         return false;
@@ -59,7 +70,7 @@ struct ARRAY_ADT init()
 
     //Creating the pointer for the Array;
     Array.A = (int*) malloc(Array.size * sizeof(int));
-
+    //printf("Size of from init: %d", sizeof(Array.A));
     do
     {
         printf("Enter the length of the Array: ");
@@ -67,12 +78,30 @@ struct ARRAY_ADT init()
     }while(OutofRange(Array.size,Array.len));
 
     printf("Please enter the values in the array: ");
+
     for(int i = 0; i < Array.len; i++)
     {
         Array.A[i] = Integerinput();
     }
 
+    Array.count = Array.len;
+
+    for(int i = Array.len; i < Array.size; i++)
+    {
+        Array.A[i] = -1;
+    }
+
     return Array;
+}
+
+//Function for checking the Index
+bool invalidIndex(int size, int index)
+{
+    size--;
+    if(index < 0 || index > size)
+        return true;
+    else
+        return false;
 }
 
 /* -------------------------------OPERATIONS----------------------------------------*/
@@ -89,11 +118,11 @@ void display(struct ARRAY_ADT Array)
 
 void add(struct ARRAY_ADT *Array) // I am getting the address of the structure and using it to make a call like pass by reference
 {
-    ("Size: %d", Array -> size);
-
-    if(OutofRange(Array -> size , Array -> len))
+    int lencheck = Array ->len;
+    lencheck++;
+    if(OutofRange(Array -> size, lencheck))
     {
-        printf("Array is full");
+        printf("Invalid Operation! Array is FULL.");
     }
     else
     {
@@ -102,68 +131,120 @@ void add(struct ARRAY_ADT *Array) // I am getting the address of the structure a
         scanf("%d", &num);
         Array -> A[Array->len] = num;
         Array -> len++;
+        Array -> count++;
     }
 }
 
+//Implementation of simple insert function
 void insert(struct ARRAY_ADT *Array)
 {
     int num;
     int index;
     int i = Array -> len - 1;
+    int countcheck = Array->count;
+    countcheck++;
 
-    printf("Enter the value to be inserted: ");
-    scanf("%d", &num);
-
-    printf("Enter the value to be index: ");
-    scanf("%d", &index);
-
-    if(OutofRange(Array -> size, Array -> len))
+    if(OutofRange(Array -> size, countcheck ))
     {
-        printf("Array is full:");
+        printf("Invalid Operation! Array is FULL.");
+        return;
     }
     else
     {
-        if (OutofRange(Array -> size, index))
+        do
         {
-            printf("Index is not valid");
+            printf("Enter the value to be index: ");
+            scanf("%d", &index);
+        }while(invalidIndex(Array->size, index));
+
+        printf("Enter the value to be inserted: ");
+        scanf("%d", &num);
+        if(index >= Array->len)
+        {
+            Array -> A[index] = num;
+            Array -> len = index + 1;
+        }
+        else if(index < Array->len)
+        {
+            Array -> A[index] = num;
         }
         else
         {
-            while(i >= index)
-            {
-                Array->A[i+1] = Array->A[i];
-                i--;
-            }
-
             Array -> A[index] = num;
             Array -> len++;
         }
-
+        Array -> count++;
     }
 }
-//This is the delete element function
-void deleteElement(struct ARRAY_ADT *Array)
+
+/*void insert(struct ARRAY_ADT *Array)
 {
+    int num;
     int index;
     int i = Array -> len - 1;
+    int countcheck = Array ->count;
+    countcheck++;
 
-    printf("Enter the index to be deleted: ");
-    scanf("%d", &index);
-
-    if (OutofRange(Array -> len, index))
+    if(OutofRange(Array -> size, countcheck))
     {
-        printf("Index is not valid");
+        printf("Invalid Operation! Array is FULL.");
+        return;
     }
     else
     {
-        for (i = index ;i < Array -> len; i++)
+        do
         {
-            Array->A[i] = Array->A[i+1];
+            printf("Enter the value to be index: ");
+            scanf("%d", &index);
+        }while(invalidIndex(Array->size, index));
+
+        printf("Enter the value to be inserted: ");
+        scanf("%d", &num);
+
+        if(index >= Array -> len)
+        {
+            Array -> A[index] = num;
+            Array -> len = index+1;
         }
 
-        Array -> len--;
-        Array -> A[Array -> len] = 0;
+        else
+        {
+            if(Array -> A[index] == -1)
+            {
+                Array -> A[index] = num;
+            }
+            else
+            {
+                while(i >= index)
+                {
+                    Array->A[i+1] = Array->A[i];
+                    i--;
+                }
+                Array -> A[index] = num;
+                Array -> len++;
+            }
+        }
     }
+}
+*/
+
+void deleteElement(struct ARRAY_ADT *Array)
+{
+    int index;
+    //int i;
+
+    do
+    {
+        printf("Enter the index to be deleted: ");
+        scanf("%d", &index);
+    }while(invalidIndex(Array -> len, index));
+
+        /*for (i = index ;i < Array -> len; i++)
+        {
+            Array->A[i] = Array->A[i+1];
+        }*/
+        Array -> A[index] = -1;
+        Array -> count--;
 }
 
 
@@ -173,12 +254,11 @@ int main()
 {
     struct ARRAY_ADT Array = init();
     int choice;
-    // add the menu here and update it regularly
-    //User need to press the key
     printf("*********************************************** MENU ***********************************************");
     printf("\n 1. Append");
     printf("\n 2. Insert");
     printf("\n 3. Delete");
+    printf("\n 4. Display");
     printf("\n 9. Exit");
 
     do
