@@ -248,6 +248,29 @@ void deleteElement(struct ARRAY_ADT *Array)
 }
 
 
+int linearSearchWithShifting(struct ARRAY_ADT array)
+{
+    int num;
+    printf("Please enter the number to be searched: ");
+    num =Integerinput();
+    for(int i = 0; i < array.len; i++)
+    {
+        if(array.A[i] == num)
+        {
+            if(i != 0)
+            {
+                int temp;
+                temp = array.A[i-1];
+                array.A[i-1] = array.A[i];
+                array.A[i] = temp;
+                return i-1;
+            }
+            return i;
+        }
+    }
+return -1;
+}
+
 
 //Main Driving Function
 int main()
@@ -259,6 +282,7 @@ int main()
     printf("\n 2. Insert");
     printf("\n 3. Delete");
     printf("\n 4. Display");
+    printf("\n 5. Linear Search");
     printf("\n 9. Exit");
 
     do
@@ -275,6 +299,14 @@ int main()
                     break;
             case 4: display(Array);
                     break;
+            case 5: {
+                        int num = linearSearchWithShifting(Array);
+                        if(num == -1)
+                            printf("Number does not exist in the list");
+                        else
+                            printf("Number is located at %d position.", num);
+                        break;
+                    }
             case 9: break;
             default: printf("Wrong choice please insert a valid number");
 
