@@ -247,7 +247,7 @@ void deleteElement(struct ARRAY_ADT *Array)
         Array -> count--;
 }
 
-
+// Linear search with shifting implemented to shift searched element one block before so that in the next search 1 iteration less should be taken by the system
 int linearSearchWithShifting(struct ARRAY_ADT array)
 {
     int num;
