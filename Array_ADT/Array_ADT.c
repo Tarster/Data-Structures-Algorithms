@@ -271,6 +271,11 @@ int linearSearchWithShifting(struct ARRAY_ADT array)
 return -1;
 }
 
+//Binary Search using loop
+int binarySearch(struct ARRAY_ADT Array)
+{
+    ;
+}
 
 //Main Driving Function
 int main()
