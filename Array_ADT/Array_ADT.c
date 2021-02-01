@@ -312,6 +312,14 @@ int main()
                             printf("Number is located at %d position.", num);
                         break;
                     }
+            case 6:{
+                        int num = binarySearch(Array);
+                        if(num == -1)
+                            printf("Number does not exist in the list");
+                        else
+                            printf("Number is located at %d position.", num);
+                        break;
+                   }
             case 9: break;
             default: printf("Wrong choice please insert a valid number");
 
