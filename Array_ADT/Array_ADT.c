@@ -250,7 +250,7 @@ void deleteElement(struct ARRAY_ADT *Array)
 // Linear search with shifting implemented to shift searched element one block before so that in the next search 1 iteration less should be taken by the system
 int linearSearchWithShifting(struct ARRAY_ADT array)
 {
-    int num;
+    int num = 0;
     printf("Please enter the number to be searched: ");
     num =Integerinput();
     for(int i = 0; i < array.len; i++)
@@ -272,9 +272,27 @@ return -1;
 }
 
 //Binary Search using loop
-int binarySearch(struct ARRAY_ADT Array)
+int binarySearch(struct ARRAY_ADT Array )
 {
-    ;
+    printf("Please enter the number to be searched: ");
+    int num =Integerinput();
+
+    int lower = 0;
+    int upper = Array.len;
+
+
+    while (lower <= upper)
+    {
+        int middle = (lower + upper) / 2;
+
+        if(Array.A[middle] == num)
+            return middle;
+        else if(Array.A[middle] > num)
+            lower = middle + 1;
+        else
+            upper = middle - 1;
+    }
+    return -1;
 }
 
 //Main Driving Function
@@ -288,6 +306,7 @@ int main()
     printf("\n 3. Delete");
     printf("\n 4. Display");
     printf("\n 5. Linear Search");
+    printf("\n 6. Binary Search");
     printf("\n 9. Exit");
 
     do
