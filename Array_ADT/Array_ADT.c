@@ -276,22 +276,24 @@ int binarySearch(struct ARRAY_ADT Array )
 {
     printf("Please enter the number to be searched: ");
     int num =Integerinput();
-
+    // Storing lower and upper number
     int lower = 0;
     int upper = Array.len;
 
-
+    //Will not exit unit lower is high so number is not found
     while (lower <= upper)
     {
         int middle = (lower + upper) / 2;
-
+        //Comparing the number
         if(Array.A[middle] == num)
             return middle;
-        else if(Array.A[middle] > num)
+        //If number is less than this going to happen or else will execute
+        else if(Array.A[middle] < num)
             lower = middle + 1;
         else
             upper = middle - 1;
     }
+    //Number not found return -1
     return -1;
 }
 
