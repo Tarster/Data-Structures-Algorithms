@@ -142,6 +142,8 @@ void add(struct ARRAY_ADT *Array)
 }
 
 //Implementation of simple insert function
+// The Idea was to shift elements to add elements in between which is quite possible but then we can add only in between.
+// So to  circumvent that I made function like this
 void insert(struct ARRAY_ADT *Array)
 {
     int num;
@@ -195,22 +197,26 @@ void insert(struct ARRAY_ADT *Array)
         Array -> count++;
     }
 }
-
+//Deleting the Element
 void deleteElement(struct ARRAY_ADT *Array)
 {
     int index;
+
     do
     {
         printf("Enter the index to be deleted: ");
         scanf("%d", &index);
     }while(invalidIndex(Array -> len, index));
 
-        /*for (i = index ;i < Array -> len; i++)
-        {
-            Array->A[i] = Array->A[i+1];
-        }*/
+    // If the number is -1 at the required index than we can just return
+    if(Array -> A[index] == -1)
+        return;
+    // We need to empty the number and set it to -1 and decrement the value of count by 1
+    else
+    {
         Array -> A[index] = -1;
         Array -> count--;
+    }
 }
 
 // Linear search with shifting implemented to shift searched element one block before so that in the next search 1 iteration less should be taken by the system
