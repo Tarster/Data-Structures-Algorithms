@@ -116,21 +116,27 @@ void display(struct ARRAY_ADT Array)
     }
 }
 
-void add(struct ARRAY_ADT *Array) // I am getting the address of the structure and using it to make a call like pass by reference
+// I am getting the address of the structure and using it to make a call like pass by reference
+void add(struct ARRAY_ADT *Array)
 {
     int lencheck = Array ->len;
     lencheck++;
+    //Getting length and increasing it by 1 so that it can be checked for Full Array
     if(OutofRange(Array -> size, lencheck))
     {
         printf("Invalid Operation! Array is FULL.");
     }
+    // Array is not full resume our operations;
     else
     {
+        //getting the actual number now
         int num;
         printf("Enter the value to be appended: ");
         scanf("%d", &num);
+        //Setting the number to the place and incrementing length by 1
         Array -> A[Array->len] = num;
         Array -> len++;
+        // We have added 1 number so count should also be increamented
         Array -> count++;
     }
 }
@@ -140,15 +146,15 @@ void insert(struct ARRAY_ADT *Array)
 {
     int num;
     int index;
-    int i = Array -> len - 1;
     int countcheck = Array->count;
     countcheck++;
-
+    // Number can't be added as Array is full rightnow
     if(OutofRange(Array -> size, countcheck ))
     {
         printf("Invalid Operation! Array is FULL.");
         return;
     }
+    // Array is not full still there is some space
     else
     {
         do
@@ -159,80 +165,40 @@ void insert(struct ARRAY_ADT *Array)
 
         printf("Enter the value to be inserted: ");
         scanf("%d", &num);
+
+        /* We have to insert element at a place when length is less than index;
+           For ex: Size : 4  Length: 1
+           we choose an index 3 which is valid now length should be set to 4
+           as we can access index 0-3 now.
+        */
         if(index >= Array->len)
         {
             Array -> A[index] = num;
             Array -> len = index + 1;
         }
-        else if(index < Array->len)
-        {
-            Array -> A[index] = num;
-        }
+
+        //In this case chosen index is less than the length so either we are updating
+        //or inserting a value at the position which contains a initial value of -1;
         else
         {
-            Array -> A[index] = num;
-            Array -> len++;
+            // If it's -1 we want to update the count variable as well
+            if(Array -> A[index] == -1)
+                Array -> A[index] = num;
+            // If we are updating just set the number and return
+            else
+            {
+                Array -> A[index] = num;
+                return ;
+            }
         }
+        // Update the count as a new number is added right now
         Array -> count++;
     }
 }
 
-/*void insert(struct ARRAY_ADT *Array)
-{
-    int num;
-    int index;
-    int i = Array -> len - 1;
-    int countcheck = Array ->count;
-    countcheck++;
-
-    if(OutofRange(Array -> size, countcheck))
-    {
-        printf("Invalid Operation! Array is FULL.");
-        return;
-    }
-    else
-    {
-        do
-        {
-            printf("Enter the value to be index: ");
-            scanf("%d", &index);
-        }while(invalidIndex(Array->size, index));
-
-        printf("Enter the value to be inserted: ");
-        scanf("%d", &num);
-
-        if(index >= Array -> len)
-        {
-            Array -> A[index] = num;
-            Array -> len = index+1;
-        }
-
-        else
-        {
-            if(Array -> A[index] == -1)
-            {
-                Array -> A[index] = num;
-            }
-            else
-            {
-                while(i >= index)
-                {
-                    Array->A[i+1] = Array->A[i];
-                    i--;
-                }
-                Array -> A[index] = num;
-                Array -> len++;
-            }
-        }
-    }
-}
-*/
-
 void deleteElement(struct ARRAY_ADT *Array)
 {
     int index;
-    //int i;
-
     do
     {
         printf("Enter the index to be deleted: ");
@@ -297,6 +263,34 @@ int binarySearch(struct ARRAY_ADT Array )
     return -1;
 }
 
+// Return element at a certain index
+int getElement(struct ARRAY_ADT array)
+{
+    int index;
+    do
+    {
+        printf("Please enter the index: ");
+        index = Integerinput();
+    }while(invalidIndex(array.size,index));
+    return array.A[index];
+}
+
+void setElement(struct ARRAY_ADT *array)
+{
+    int index, num;
+    do
+    {
+        printf("Please enter the index: ");
+        index = Integerinput();
+    }while(invalidIndex(array->size,index));
+
+    printf("Please enter the numerical value: ");
+    num =Integerinput();
+
+    array -> A[index] = num;
+}
+
+
 //Main Driving Function
 int main()
 {
@@ -309,11 +303,13 @@ int main()
     printf("\n 4. Display");
     printf("\n 5. Linear Search");
     printf("\n 6. Binary Search");
+    printf("\n 7. Get Element");
+    printf("\n 8. Set Element");
     printf("\n 9. Exit");
 
     do
     {
-        printf("\n Please Enter your choice:");
+        printf("\nPlease Enter your choice:");
         scanf("%d", &choice);
         switch(choice)
         {
@@ -341,6 +337,13 @@ int main()
                             printf("Number is located at %d position.", num);
                         break;
                    }
+            case 7: {
+                        int num = getElement(Array);
+                        printf("The number at the desired index is: %d", num );
+                        break;
+                    }
+            case 8: setElement(&Array);
+                    break;
             case 9: break;
             default: printf("Wrong choice please insert a valid number");
 
