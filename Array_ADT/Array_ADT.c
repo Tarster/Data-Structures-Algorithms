@@ -296,6 +296,7 @@ void setElement(struct ARRAY_ADT *array)
     array -> A[index] = num;
 }
 
+// Daily Commit
 
 //Main Driving Function
 int main()
