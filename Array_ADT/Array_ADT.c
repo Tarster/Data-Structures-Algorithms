@@ -242,7 +242,7 @@ int linearSearchWithShifting(struct ARRAY_ADT array)
     }
 return -1;
 }
-
+//Daily Commit
 //Binary Search using loop
 int binarySearch(struct ARRAY_ADT Array )
 {
