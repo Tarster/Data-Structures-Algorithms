@@ -136,7 +136,7 @@ void add(struct ARRAY_ADT *Array)
         //Setting the number to the place and incrementing length by 1
         Array -> A[Array->len] = num;
         Array -> len++;
-        // We have added 1 number so count should also be increamented
+        // We have added 1 number so count should also be incremented
         Array -> count++;
     }
 }
@@ -243,8 +243,6 @@ int linearSearchWithShifting(struct ARRAY_ADT array)
 return -1;
 }
 
-//
-
 //Binary Search using loop
 int binarySearch(struct ARRAY_ADT Array )
 {
@@ -296,6 +294,18 @@ void setElement(struct ARRAY_ADT *array)
     num =Integerinput();
 
     array -> A[index] = num;
+}
+
+//Max Element in the Array
+int maxElement(struct ARRAY_ADT array)
+{
+    int max =array.A[0];
+    for(int i = 1; i < Array.length; i++)
+    {
+        if(array.A[i] > max)
+            max = array.A[i];
+    }
+    return max;
 }
 
 //Main Driving Function
