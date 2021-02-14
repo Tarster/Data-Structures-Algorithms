@@ -15,24 +15,25 @@ int string_length(char *String)
 //Uppercase or Lowercase
 void change_case(char *String, char type)
 {
-    if(type = 'U')
+    int i = 0;
+    if(type == 'U')
     {
-        for(int i = 0;String[i] != '\0'; i++)
+        for(; String[i] != '\0'; i++)
         {
-            if(String[i] >= 97 && String[i] <= 122)
+            if(String[i] >= 'a' && String[i] <= 'z')
             {
-                String[i] -= 32;
+                String[i] = String[i] - 32;
             }
         }
     }
 
     else
     {
-        for(int i = 0;String[i] != '\0'; i++)
+        for(;String[i] != '\0'; i++)
         {
-            if(String[i] >= 65 && String[i] <= 90)
+            if(String[i] >= 'A' && String[i] <= 'Z')
             {
-                String[i] += 32;
+                String[i] = String[i] + 32;
             }
         }
     }
@@ -41,7 +42,7 @@ void change_case(char *String, char type)
 //Driver Function
 int main()
 {
-    char *s = "GitHub";
+    char s[] = "GitHub";
     change_case(s,'U');
     printf("%s",s);
     return 0;
