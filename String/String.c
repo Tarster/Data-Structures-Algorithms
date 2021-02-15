@@ -133,6 +133,20 @@ int Palindrome(char *String)
     return 0;
 }
 
+//Finding Duplicate using hash table
+void duplicate(char *String)
+{
+    int hash_Table[26] ={0};
+    for(int i = 0; String[i] != '\0'; i++)
+    {
+        hash_Table[String[i] - 97]++;
+        if(hash_Table[String[i] - 97] == 2)
+        {
+            printf("%c is occurring more than 1 time. \n", String[i]);
+        }
+    }
+}
+
 //Driver Function
 int main()
 {
@@ -145,9 +159,10 @@ int main()
     It creates a string literal and copy that in the array ss thus providing a character array which can be modified.
     */
 
-    char s[] = "madam";
+    char s[] = "murder";
     //vowel_consonent_count(s,'V');
     //reverse_string(s);
-    printf("%d",Palindrome(s));
+    duplicate(s);
+    //printf("%d",Palindrome(s));
     return 0;
 }
