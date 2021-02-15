@@ -99,6 +99,21 @@ int count_words(char *String)
     return words;
 }
 
+//Reversing the String
+void reverse_string(char *String)
+{
+    //Setting j to the second last letter of the string
+    int i, j = string_length(String) - 1;
+    char temp = 'c';
+    //Moving the loop until i is greater than j it's going to happen in mid we can use also use length - i for this trick if we know the length already
+    for(i = 0; i < j; i++,j--)
+    {
+        //Classic swapping of the values at two indexs
+        temp = String[i];
+        String[i] = String[j];
+        String[j] =temp;
+    }
+}
 
 //Driver Function
 int main()
@@ -114,6 +129,7 @@ int main()
 
     char s[] = "My string contains 5 words ";
     //vowel_consonent_count(s,'V');
-    printf("%d",count_words(s));
+    reverse_string(s);
+    printf("%s",s);
     return 0;
 }
