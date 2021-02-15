@@ -16,13 +16,13 @@ int string_length(char *String)
 void change_case(char *String, char type)
 {
     int i = 0;
-    if(type == 'U')
+    if(type == 'U' || type == 'u')
     {
         for(; String[i] != '\0'; i++)
         {
             if(String[i] >= 'a' && String[i] <= 'z')
             {
-                String[i] = String[i] - 32;
+                String[i] -= 32;
             }
         }
     }
@@ -33,17 +33,44 @@ void change_case(char *String, char type)
         {
             if(String[i] >= 'A' && String[i] <= 'Z')
             {
-                String[i] = String[i] + 32;
+                String[i] += 32;
             }
         }
     }
 }
 
+//counting consonents and vowels
+int vowel_consonent_count(char *String, char returnArg)
+{
+    char temp ='c';
+    int consonent = 0;
+    int vowel = 0;
+    for(int i = 0; String[i] != '\0'; i++)
+    {
+        temp =String[i];
+        if (temp >= 'a' && temp <= 'z')
+            temp -= 32;
+
+        if ((temp >= 'a' && temp <= 'z') || (temp >= 'A' && temp <= 'Z'))
+        {
+            if (temp == 'A' || temp == 'E' || temp == 'I' || temp == 'O' || temp == 'U')
+                vowel++;
+            else
+                consonent++;
+        }
+    }
+    if (returnArg == 'V' || returnArg == 'v')
+        return vowel;
+    else
+        return consonent;
+}
+
+
 //Driver Function
 int main()
 {
     char s[] = "GitHub";
-    change_case(s,'U');
-    printf("%s",s);
+    //vowel_consonent_count(s,'V');
+    printf("%d",vowel_consonent_count(s,'c'));
     return 0;
 }
