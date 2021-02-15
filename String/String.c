@@ -115,6 +115,24 @@ void reverse_string(char *String)
     }
 }
 
+//Palindrome checking of a string
+int Palindrome(char *String)
+{
+    //Setting j to the second last letter of the string
+    int i, j = string_length(String) - 1;
+    char temp = 'c';
+    //Moving the loop until i is greater than j it's going to happen in mid we can use also use length - i for this trick if we know the length already
+    for(i = 0; i < j; i++,j--)
+    {
+        //If the letters are not equal that means it's not a palindrome
+        if(String[i] != String[j])
+        {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 //Driver Function
 int main()
 {
@@ -127,9 +145,9 @@ int main()
     It creates a string literal and copy that in the array ss thus providing a character array which can be modified.
     */
 
-    char s[] = "My string contains 5 words ";
+    char s[] = "madam";
     //vowel_consonent_count(s,'V');
-    reverse_string(s);
-    printf("%s",s);
+    //reverse_string(s);
+    printf("%d",Palindrome(s));
     return 0;
 }
