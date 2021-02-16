@@ -137,15 +137,69 @@ int Palindrome(char *String)
 void duplicate(char *String)
 {
     int hash_Table[26] ={0};
+    char temp;
     for(int i = 0; String[i] != '\0'; i++)
     {
-        hash_Table[String[i] - 97]++;
-        if(hash_Table[String[i] - 97] == 2)
-        {
-            printf("%c is occurring more than 1 time. \n", String[i]);
-        }
+        if ((String[i] >= 'a' && String[i] <= 'z') || (String[i] >= 'A' && String[i] <= 'Z'))
+         {
+             //If it's a lower case Just convert it to uppercase
+             if (String[i] >= 'a' && String[i] <= 'z')
+             {
+                 temp = String[i] - 32;
+             }
+             //if already in uppercase just leave it as it is
+             else
+                temp = String[i];
+
+            hash_Table[temp - 65]++;
+            if(hash_Table[temp - 65] == 2)
+            {
+                printf("%c is occurring more than 1 time. \n", String[i]);
+            }
+         }
     }
 }
+
+/*
+Finding duplicate in a string using bitwise operation.It will ignore the case while finding for the duplicate
+Shortcoming of this is that only we can find if some element is duplicate or not. We can't find how many times it's occurring in the given string.
+If an element is occurring more than 2 time for ex: 3 than it will show the duplication statement 2 times that is exactly the "time of occurrence - 1".
+*/
+ void duplicate_Bitwise(char *String)
+ {
+     int hash_bit = 0 ,mask;
+     char temp;
+     //Loop over the string until null-character is found
+     for(int i = 0; String[i] != '\0'; i++)
+     {
+         //Checking if we are dealing with a character or not
+         if ((String[i] >= 'a' && String[i] <= 'z') || (String[i] >= 'A' && String[i] <= 'Z'))
+         {
+             //If it's a lower case Just convert it to uppercase
+             if (String[i] >= 'a' && String[i] <= 'z')
+             {
+                 temp = String[i] - 32;
+             }
+             //if already in uppercase just leave it as it is
+             else
+                temp = String[i];
+
+            //Set the masking and merging bit to 1
+            mask = 1;
+            //Doing left shift bitwise operation so that 1 can be shifted to appropriate location
+            mask = mask << temp - 65;
+
+            //Checking using masking(AND) if the bit at that place is 1 or 0,if it evaluate to 1 we print the duplicate vaiable
+            if(mask & hash_bit)
+            {
+                printf("%c is occurring more than 1 time. \n", temp);
+            }
+            //Just set the appropriate bit to 1 using the merging(OR) operation
+            else
+                hash_bit = hash_bit | mask;
+        }
+     }
+ }
 
 //Driver Function
 int main()
@@ -159,7 +213,7 @@ int main()
     It creates a string literal and copy that in the array ss thus providing a character array which can be modified.
     */
 
-    char s[] = "murder";
+    char s[] = "my my my my hello cc";
     //vowel_consonent_count(s,'V');
     //reverse_string(s);
     duplicate(s);
