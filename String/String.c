@@ -201,6 +201,54 @@ If an element is occurring more than 2 time for ex: 3 than it will show the dupl
      }
  }
 
+ //Function to find the anagram
+ int Anagram(char *String1, char *String2)
+ {
+     int hash_table[26] = {0};
+     int i = 0;
+     char temp;
+     if(string_length(String1) == string_length(String2))
+     {
+         return 1;
+     }
+     for(;String1[i] != '\0';i++)
+     {
+         if ((String1[i] >= 'a' && String1[i] <= 'z') || (String1[i] >= 'A' && String1[i] <= 'Z'))
+         {
+             //If it's a lower case Just convert it to uppercase
+             if (String1[i] >= 'a' && String1[i] <= 'z')
+             {
+                 temp = String1[i] - 32;
+             }
+             //if already in uppercase just leave it as it is
+             else
+                temp = String1[i];
+
+             hash_table[temp - 65]++;
+         }
+     }
+     for(i = 0; String2[i] != '\0'; i++)
+     {
+         if ((String2[i] >= 'a' && String2[i] <= 'z') || (String2[i] >= 'A' && String2[i] <= 'Z'))
+         {
+             //If it's a lower case Just convert it to uppercase
+             if (String2[i] >= 'a' && String2[i] <= 'z')
+             {
+                 temp = String2[i] - 32;
+             }
+             //if already in uppercase just leave it as it is
+             else
+                temp = String2[i];
+
+             hash_table[temp - 65]--;
+             if(hash_table[temp - 65] < 0)
+                return 1;
+         }
+     }
+
+    return 0;
+ }
+
 //Driver Function
 int main()
 {
@@ -213,10 +261,11 @@ int main()
     It creates a string literal and copy that in the array ss thus providing a character array which can be modified.
     */
 
-    char s[] = "my my my my hello cc";
+    char s[] = "Observer";
+    char s1[] = "varbose";
     //vowel_consonent_count(s,'V');
     //reverse_string(s);
-    duplicate(s);
-    //printf("%d",Palindrome(s));
+   // Anagram(s,s1);
+    printf("%d", Anagram(s,s1));
     return 0;
 }
