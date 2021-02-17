@@ -1,23 +1,97 @@
 //This file contains exercise and function related to String
 #include<stdio.h>
+#include<stdlib.h>
+#include<limits.h>
+#include<string.h>
 
-#define CHARMAX 100
-//Function to get only integer value
-int get_Integer()
+// Function to only input strings
+char* GetString(void)
 {
-    char *p, s[100];
-    int n;
-    while (fgets (s, sizeof(s), stdin))
+    // grow able buffer for chars
+    char *buffer = NULL;
+
+    // capacity of buffer
+    unsigned int capacity = 0;
+
+    // number of chars actually in buffer
+    unsigned int n = 0;
+
+    // character read or EOF
+    int c;
+
+    // iteratively get chars from standard input
+    while ((c = fgetc(stdin)) != '\n' && c != EOF)
     {
-        n = strtol(s, &p, 10);
-        if (p == s || *p != '\n')
-            printf("Error!\n Please enter the integer value: ");
-        else
-            return n;
+        // grow buffer if necessary
+        if (n + 1 > capacity)
+        {
+            // determine new capacity: start at 32 then double
+            if (capacity == 0)
+                capacity = 32;
+            else if (capacity <= (UINT_MAX / 2))
+                capacity *= 2;
+            else
+            {
+                free(buffer);
+                return NULL;
+            }
+
+            // extend buffer's capacity
+            char *temp = realloc(buffer, capacity * sizeof(char));
+            if (temp == NULL)
+            {
+                free(buffer);
+                return NULL;
+            }
+            buffer = temp;
+        }
+
+        // append current character to buffer
+        buffer[n++] = c;
     }
-    return -1;
+
+    // return NULL if user provided no input
+    if (n == 0 && c == EOF)
+        return NULL;
+
+    // minimize buffer
+    char *minimal = malloc((n + 1) * sizeof(char));
+    strncpy(minimal, buffer, n);
+    free(buffer);
+
+    // terminate string
+    minimal[n] = '\0';
+
+    // return string
+    return minimal;
 }
 
+//Function to get only integer value
+int GetInt(void)
+{
+    // try to get an int from user
+    while (1)
+    {
+        // get line of text, returning INT_MAX on failure
+        char *line = GetString();
+        if (line == NULL)
+            return INT_MAX;
+
+        // return an int if only an int (possibly with
+        // leading and/or trailing whitespace) was provided
+        int n; char c;
+        if (sscanf(line, " %d %c", &n, &c) == 1)
+        {
+            free(line);
+            return n;
+        }
+        else
+        {
+            free(line);
+            printf("Retry: ");
+        }
+    }
+}
 
 //Function to find the length of the string
 int string_length(char *String)
@@ -292,13 +366,14 @@ int main()
     printf("\n 9. Exit");
     do{
         printf("\n Please Enter your choice:");
-        choice = get_Integer();
+        choice = GetInt();
         switch(choice)
         {
-            case 1: { char c[CHARMAX];
-                        printf(" Enter the String:");
-                        gets(c);
+            case 1: {
+                        char *c;
+                        c = GetString();
                         printf("The length of the input string is: %d", string_length(c));
+                        free(c);
                         break;
                     }
             case 2:;
