@@ -1,6 +1,14 @@
 //This file contains exercise and function related to String
 #include<stdio.h>
 
+//Function to get only integer value
+int get_Integer()
+{
+    int num = 0;
+    scanf("%d", &num);
+    return num;
+}
+
 //Function to find the length of the string
 int string_length(char *String)
 {
@@ -44,11 +52,11 @@ void change_case(char *String, char type)
     }
 }
 
-//counting consonents and vowels
-int vowel_consonent_count(char *String, char returnArg)
+//counting consonants and vowels
+int vowel_consonant_count(char *String, char returnArg)
 {
     char temp ='c';
-    int consonent = 0;
+    int consonant = 0;
     int vowel = 0;
     //traversing string from 0 to null-character
     for(int i = 0; String[i] != '\0'; i++)
@@ -65,16 +73,16 @@ int vowel_consonent_count(char *String, char returnArg)
             //Simple checking again vowels
             if (temp == 'A' || temp == 'E' || temp == 'I' || temp == 'O' || temp == 'U')
                 vowel++;
-            //Else it's a consonent
+            //Else it's a consonant
             else
-                consonent++;
+                consonant++;
         }
     }
     //Checking which value to return as we can only return 1 value at a time;
     if (returnArg == 'V' || returnArg == 'v')
         return vowel;
     else
-        return consonent;
+        return consonant;
 }
 
 //Counting words in a string
@@ -108,7 +116,7 @@ void reverse_string(char *String)
     //Moving the loop until i is greater than j it's going to happen in mid we can use also use length - i for this trick if we know the length already
     for(i = 0; i < j; i++,j--)
     {
-        //Classic swapping of the values at two indexs
+        //Classic swapping of the values at two indexes
         temp = String[i];
         String[i] = String[j];
         String[j] =temp;
@@ -260,12 +268,27 @@ int main()
     char ss[] = "I can be changed";
     It creates a string literal and copy that in the array ss thus providing a character array which can be modified.
     */
+    int choice;
 
-    char s[] = "Observer";
-    char s1[] = "varbose";
-    //vowel_consonent_count(s,'V');
-    //reverse_string(s);
-   // Anagram(s,s1);
-    printf("%d", Anagram(s,s1));
+    printf("************************************* MENU *************************************");
+    printf("\n 1. Length of the String");
+    printf("\n 2. Change string to Lowercase or Uppercase");
+    printf("\n 3. Count Vowels or Consonants");
+    printf("\n 4. Count Words in a String");
+    printf("\n 5. Reversing the String");
+    printf("\n 6. Checking for Palindrome");
+    printf("\n 7. Duplicate alphabets in the String");
+    printf("\n 8. Finding if two strings are ANAGRAM");
+    printf("\n 9. Exit");
+    do{
+        printf("\n Please Enter your choice:");
+        choice = get_Integer();
+        switch(choice)
+        {
+            case 9: return 0;
+            default:printf("Wrong Choice! Please enter a valid option.");
+        }
+
+    }while(choice == 9);
     return 0;
 }
