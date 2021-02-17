@@ -1,6 +1,7 @@
 //This file contains exercise and function related to String
 #include<stdio.h>
 
+#define CHARMAX 100
 //Function to get only integer value
 int get_Integer()
 {
@@ -16,6 +17,7 @@ int get_Integer()
     }
     return -1;
 }
+
 
 //Function to find the length of the string
 int string_length(char *String)
@@ -269,7 +271,7 @@ If an element is occurring more than 2 time for ex: 3 than it will show the dupl
 int main()
 {
     /*
-    char *ss ="String_Literal";
+    char *ss = "String_Literal";
     We can't change declared strings like this because now we hold actual address to the string literal which is a constant/read-only value.
     If we perform any operation on this it will give us memory address fault or segmentation fault.
     when we write
@@ -293,6 +295,19 @@ int main()
         choice = get_Integer();
         switch(choice)
         {
+            case 1: { char c[CHARMAX];
+                        printf(" Enter the String:");
+                        gets(c);
+                        printf("The length of the input string is: %d", string_length(c));
+                        break;
+                    }
+            case 2:;
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
             case 9: return 0;
             default:printf(" Wrong Choice! Please enter a valid option.");
         }
