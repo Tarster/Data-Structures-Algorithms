@@ -4,9 +4,17 @@
 //Function to get only integer value
 int get_Integer()
 {
-    int num = 0;
-    scanf("%d", &num);
-    return num;
+    char *p, s[100];
+    int n;
+    while (fgets (s, sizeof(s), stdin))
+    {
+        n = strtol(s, &p, 10);
+        if (p == s || *p != '\n')
+            printf("Error!\n Please enter the integer value: ");
+        else
+            return n;
+    }
+    return -1;
 }
 
 //Function to find the length of the string
@@ -286,9 +294,9 @@ int main()
         switch(choice)
         {
             case 9: return 0;
-            default:printf("Wrong Choice! Please enter a valid option.");
+            default:printf(" Wrong Choice! Please enter a valid option.");
         }
 
-    }while(choice == 9);
+    }while(choice != 9);
     return 0;
 }
