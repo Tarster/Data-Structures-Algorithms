@@ -376,7 +376,17 @@ int main()
                         free(c);
                         break;
                     }
-            case 2:;
+            case 2: {
+                        char *c;
+                        char temp;
+                        c = GetString();
+                        printf("Enter U/u if you want to convert into Uppercase, Else press any key:");
+                        scanf("%c", &temp);
+                        vowel_consonant_count(c,temp);
+                        printf("\n The modified string is: %s",c);
+                        free(c);
+                        break;
+                    }
             case 3:
             case 4:
             case 5:
