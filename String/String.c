@@ -353,7 +353,7 @@ int main()
     It creates a string literal and copy that in the array ss thus providing a character array which can be modified.
     */
     int choice;
-
+    //Menu
     printf("************************************* MENU *************************************");
     printf("\n 1. Length of the String");
     printf("\n 2. Change string to Lowercase or Uppercase");
