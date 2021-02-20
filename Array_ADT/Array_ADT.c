@@ -131,8 +131,8 @@ void add(struct ARRAY_ADT *Array)
     {
         //getting the actual number now
         int num;
-        printf("Enter the value to be appended: ");
-        scanf("%d", &num);
+         printf("Enter the value to be appended: ");
+         num = Integerinput();
         //Setting the number to the place and incrementing length by 1
         Array -> A[Array->len] = num;
         Array -> len++;
@@ -162,11 +162,11 @@ void insert(struct ARRAY_ADT *Array)
         do
         {
             printf("Enter the value to be index: ");
-            scanf("%d", &index);
+            index = Integerinput();
         }while(invalidIndex(Array->size, index));
 
         printf("Enter the value to be inserted: ");
-        scanf("%d", &num);
+        num = Integerinput();
 
         /* We have to insert element at a place when length is less than index;
            For ex: Size : 4  Length: 1
@@ -205,7 +205,7 @@ void deleteElement(struct ARRAY_ADT *Array)
     do
     {
         printf("Enter the index to be deleted: ");
-        scanf("%d", &index);
+        index = Integerinput();
     }while(invalidIndex(Array -> len, index));
 
     // If the number is -1 at the required index than we can just return
@@ -327,7 +327,7 @@ int main()
     do
     {
         printf("\nPlease Enter your choice:");
-        scanf("%d", &choice);
+        choice = Integerinput();
         switch(choice)
         {
             case 1: add(&Array);
