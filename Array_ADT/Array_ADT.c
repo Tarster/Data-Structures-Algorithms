@@ -300,7 +300,7 @@ void setElement(struct ARRAY_ADT *array)
 int maxElement(struct ARRAY_ADT array)
 {
     int max =array.A[0];
-    for(int i = 1; i < Array.length; i++)
+    for(int i = 1; i < array.len; i++)
     {
         if(array.A[i] > max)
             max = array.A[i];
