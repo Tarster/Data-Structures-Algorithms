@@ -4,15 +4,21 @@
 
 /*
 Array Abstract Data Type for representing Array with various functions
-1. Creating a dynamic size array in C
-2. Displaying the Array
-3. Add/Append
-4. Insert
+1. Add/Append
+2. insert
+3. deleteElement
+4. Display
+5. linearSearchwithshifting
+6. binarySearch
+7. getElement
+8. setElement - It is similar to insert
+9. maxElement - To find the biggest element in the Array
 
 Helper Functions
 1. OutOfRange - For check if the length or provided index is out of bound
-2. init - To initialize the array
-3. Integerinput - For taking only integer inputs
+2. init - To create and initialize an Array.
+3. get_integer - For taking only integer inputs
+4. invalidIndex - To check if index passed in the function is valid or not.
 */
 
 
@@ -27,7 +33,7 @@ struct ARRAY_ADT
 
 /* -------------------------------HELPER FUNCTIONS----------------------------------------*/
 //For taking only integer as input
-int Integerinput()
+int get_integer()
 {
     char *p, s[100];
     int n;
@@ -54,45 +60,12 @@ int Integerinput()
 //To check if index or length input is out of range or not.
 bool OutofRange(int size, int check)
 {
-    if (check < 1 || check > size)
+    if (check < 0 || check > size)
         return true;
     else
         return false;
 }
 
-// For creating and initializing the Array
-struct ARRAY_ADT init()
-{
-    struct ARRAY_ADT Array;
-
-    printf("Enter the size of the Array: ");
-    Array.size = Integerinput();
-
-    //Creating the pointer for the Array;
-    Array.A = (int*) malloc(Array.size * sizeof(int));
-    //printf("Size of from init: %d", sizeof(Array.A));
-    do
-    {
-        printf("Enter the length of the Array: ");
-        Array.len = Integerinput();
-    }while(OutofRange(Array.size,Array.len));
-
-    printf("Please enter the values in the array: ");
-
-    for(int i = 0; i < Array.len; i++)
-    {
-        Array.A[i] = Integerinput();
-    }
-
-    Array.count = Array.len;
-
-    for(int i = Array.len; i < Array.size; i++)
-    {
-        Array.A[i] = -1;
-    }
-
-    return Array;
-}
 
 //Function for checking the Index
 bool invalidIndex(int size, int index)
@@ -104,13 +77,56 @@ bool invalidIndex(int size, int index)
         return false;
 }
 
+// For creating and initializing the Array
+struct ARRAY_ADT init()
+{
+    //Creating the initial Array
+    struct ARRAY_ADT Array;
+
+    //Taking the size until value provided is greater than 0
+    do
+    {
+        printf("Enter the size of the Array: ");
+        Array.size = get_integer();
+    }while(Array.size < 1);
+    //Creating the pointer for the Array;
+    Array.A = (int*) malloc(Array.size * sizeof(int));
+
+    //Entering the length. It can be 0 but not -1 or greater than size
+    do
+    {
+        printf("Enter the length of the Array: ");
+        Array.len = get_integer();
+    }while(OutofRange(Array.size,Array.len));
+
+    //Displaying only when length is greater than zero
+    if(Array.len > 0)
+        printf("Please enter the values in the array: ");
+
+    //Taking inputs for the initial Array
+    for(int i = 0; i < Array.len; i++)
+    {
+        Array.A[i] = get_integer();
+    }
+
+    //Setting count to length
+    Array.count = Array.len;
+
+    //For Remaining Array just set the value to -1
+    for(int i = Array.len; i < Array.size; i++)
+    {
+        Array.A[i] = -1;
+    }
+
+    return Array;
+}
+
 /* -------------------------------OPERATIONS----------------------------------------*/
 
 //Display Function to display the values
-
 void display(struct ARRAY_ADT Array)
 {
-    for(int i = 0; i < Array.len; i++)
+    for(int i = 0; i < Array.size; i++)
     {
         printf("%d \t",Array.A[i]);
     }
@@ -132,7 +148,7 @@ void add(struct ARRAY_ADT *Array)
         //getting the actual number now
         int num;
          printf("Enter the value to be appended: ");
-         num = Integerinput();
+         num = get_integer();
         //Setting the number to the place and incrementing length by 1
         Array -> A[Array->len] = num;
         Array -> len++;
@@ -141,16 +157,18 @@ void add(struct ARRAY_ADT *Array)
     }
 }
 
-//Implementation of simple insert function
-// The Idea was to shift elements to add elements in between which is quite possible but then we can add only in between.
-// So to  circumvent that I made function like this
+/*
+Implementation of simple insert function
+The Idea was to shift elements to add elements in between which is quite possible but then we can add only in between.
+So to circumvent that I made function like this.
+*/
 void insert(struct ARRAY_ADT *Array)
 {
     int num;
     int index;
     int countcheck = Array->count;
     countcheck++;
-    // Number can't be added as Array is full rightnow
+    // Number can't be added as Array is full right now
     if(OutofRange(Array -> size, countcheck ))
     {
         printf("Invalid Operation! Array is FULL.");
@@ -162,11 +180,11 @@ void insert(struct ARRAY_ADT *Array)
         do
         {
             printf("Enter the value to be index: ");
-            index = Integerinput();
+            index = get_integer();
         }while(invalidIndex(Array->size, index));
 
         printf("Enter the value to be inserted: ");
-        num = Integerinput();
+        num = get_integer();
 
         /* We have to insert element at a place when length is less than index;
            For ex: Size : 4  Length: 1
@@ -205,7 +223,7 @@ void deleteElement(struct ARRAY_ADT *Array)
     do
     {
         printf("Enter the index to be deleted: ");
-        index = Integerinput();
+        index = get_integer();
     }while(invalidIndex(Array -> len, index));
 
     // If the number is -1 at the required index than we can just return
@@ -224,7 +242,7 @@ int linearSearchWithShifting(struct ARRAY_ADT array)
 {
     int num = 0;
     printf("Please enter the number to be searched: ");
-    num =Integerinput();
+    num =get_integer();
     for(int i = 0; i < array.len; i++)
     {
         if(array.A[i] == num)
@@ -247,7 +265,7 @@ return -1;
 int binarySearch(struct ARRAY_ADT Array )
 {
     printf("Please enter the number to be searched: ");
-    int num =Integerinput();
+    int num =get_integer();
     // Storing lower and upper number
     int lower = 0;
     int upper = Array.len;
@@ -273,38 +291,51 @@ int binarySearch(struct ARRAY_ADT Array )
 int getElement(struct ARRAY_ADT array)
 {
     int index;
+    //Checking for valid index
     do
     {
         printf("Please enter the index: ");
-        index = Integerinput();
+        index = get_integer();
     }while(invalidIndex(array.size,index));
+    //Returning value at particular index
     return array.A[index];
 }
 
 void setElement(struct ARRAY_ADT *array)
 {
     int index, num;
+    //checking for the index
     do
     {
         printf("Please enter the index: ");
-        index = Integerinput();
+        index = get_integer();
     }while(invalidIndex(array->size,index));
 
+    //getting the number from the user
     printf("Please enter the numerical value: ");
-    num =Integerinput();
+    num =get_integer();
+
+    //Setting the number and updating length and count
+    if(array -> A[index] == -1)
+        array ->count += 1;
 
     array -> A[index] = num;
+    array -> len =index;
+
 }
 
 //Max Element in the Array
 int maxElement(struct ARRAY_ADT array)
 {
     int max =array.A[0];
+    //Scanning the array for element
     for(int i = 1; i < array.len; i++)
     {
+        //Comparing for maximum Element and then setting it
         if(array.A[i] > max)
             max = array.A[i];
     }
+    //returning the max element after exiting the loop
     return max;
 }
 
@@ -327,7 +358,7 @@ int main()
     do
     {
         printf("\nPlease Enter your choice:");
-        choice = Integerinput();
+        choice = get_integer();
         switch(choice)
         {
             case 1: add(&Array);
@@ -362,7 +393,7 @@ int main()
             case 8: setElement(&Array);
                     break;
             case 9: break;
-            default: printf("Wrong choice please insert a valid number");
+            default: printf("Error! Wrong choice, Please insert a valid number.");
 
          }
     }while(choice != 9);
