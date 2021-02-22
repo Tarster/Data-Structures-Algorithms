@@ -81,7 +81,7 @@ void set_upper_triangle_column_value(int A[], int i, int j, int value)
 int get_upper_triangle_column_value(int A[], int i, int j)
 {
     //If i and j are same just send the same value at corresponding index
-    if(i == j)
+    if(i >= j)
         return A[i];
     //Else it will be zero
     else
