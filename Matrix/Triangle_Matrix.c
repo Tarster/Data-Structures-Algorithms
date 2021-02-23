@@ -169,7 +169,8 @@ int main()
                                             set_lower_triangle_row_value(A, i, j, num);
                                             break;
                                         }
-                                case 2: {   do
+                                case 2: {
+                                            do
                                             {
                                                 printf("Enter the value of i: ");
                                                 i = get_integer();
