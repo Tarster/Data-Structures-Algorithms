@@ -105,6 +105,7 @@ void upper_triangle_column_display(int A[], int size)
 
 //Main Driver Method
 
+
 int main()
 {
     int num, choice, size = 0, i = 0, j = 0;
