@@ -28,6 +28,7 @@ int out_of_range_check(int size , int i ,int j)
 
 
 
+
 //Lower Triangle Function ROW MAJOR METHOD
 
 //To set the value in Matrix
