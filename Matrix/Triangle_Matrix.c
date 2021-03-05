@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+
 //Function to get input only for integer value
 int get_integer()
 {
