@@ -1,38 +1,52 @@
 # Data Structure and Algorithms
 
+## Usage
+
+All the code is written in Python. To run the code, you need to have Python installed on your machine. If you don't have Python installed, you can download it from [here](https://www.python.org/downloads/).
+
+To run the code, you can use any Python IDE or you can run the code from the terminal. To run the code from the terminal, use the following command:
+
+```bash
+python filename.py
+```
+
+Replace `filename.py` with the name of the file you want to run. Test are written in the test folder. For each data structure test are present in their own file. Multiple test can be present in a file, make sure to exclude unwanted test by commenting them out.
+
+
 ## Table of Contents
 - [Data Structure](#data-structure)
-  - [Array](#array)
-  - [Linked List](#linked-list)
-    -[Singly Linked List](#Python\LinkedList\linked_list.py)
-    -[Doubly Linked List](#Python\LinkedList\double_linked_list.py)
-    -[Circular Linked List](#circular-linked-list)
+    - [Array](#array)
+    - [Linked List](#linked-list)
+      - [Singly Linked List](Python/LinkedList/linked_list.py)
+      - [Doubly Linked List](Python/LinkedList/double_linked_list.py)
+      - [Circular Linked List](#circular-linked-list)
+  
   - [Stack](#stack)
-    -[Linked List Implementation](#linked-list-implementation)
+    - [Linked List Implementation](#linked-list-implementation)
   - [Queue](#queue)
-    -[Linked List Implementation](#linked-list-implementation)
+    - [Linked List Implementation](#linked-list-implementation)
   - [Tree](#tree)
-    -[Binary Tree](#binary-tree)
-    -[Binary Search Tree](#binary-search-tree)
-    -[AVL Tree](#avl-tree)
-    -[Red-Black Tree](#red-black-tree)
-    -[Segment Tree](#segment-tree)
-    -[Fenwick Tree](#fenwick-tree)
-    -[Trie](#trie)
+    - [Binary Tree](#binary-tree)
+    - [Binary Search Tree](#binary-search-tree)
+    - [AVL Tree](#avl-tree)
+    - [Red-Black Tree](#red-black-tree)
+    - [Segment Tree](#segment-tree)
+    - [Fenwick Tree](#fenwick-tree)
+    - [Trie](#trie)
   - [Graph](#graph)
-    -[Adjacency Matrix](#adjacency-matrix)
-    -[Adjacency List](#adjacency-list)
-    -[Adjacency List with Weight](#adjacency-list-with-weight)
-    -[Adjacency Matrix with Weight](#adjacency-matrix-with-weight)
+    - [Adjacency Matrix](#adjacency-matrix)
+    - [Adjacency List](#adjacency-list)
+    - [Adjacency List with Weight](#adjacency-list-with-weight)
+    - [Adjacency Matrix with Weight](#adjacency-matrix-with-weight)
   - [Heap](#heap)
-    -[Min Heap](#min-heap)
-    -[Max Heap](#max-heap)
+    - [Min Heap](#min-heap)
+    - [Max Heap](#max-heap)
   - [Hashing](#hashing)
-    -[Chaining](#chaining)
-    -[Open Addressing](#open-addressing)
-      -[Linear Probing](#linear-probing)
-      -[Quadratic Probing](#quadratic-probing)
-      -[Double Hashing](#double-hashing)
+    - [Chaining](#chaining)
+    - [Open Addressing](#open-addressing)
+      - [Linear Probing](#linear-probing)
+      - [Quadratic Probing](#quadratic-probing)
+      - [Double Hashing](#double-hashing)
 
 ## ALgorithms
 - [Sorting](#sorting)
@@ -132,3 +146,6 @@
   - [Fractional Knapsack Problem](#fractional-knapsack-problem)
 
 - [Bit Manipulation](#bit-manipulation)
+
+
+You can contribute to this repository by writing more tests or by finding bugs. Make sure to follow the same structure as the existing code. If you have any questions, feel free to ask.

@@ -8,6 +8,7 @@ sys.path.append(r'Python\BaseClass')
 from base_class import Node
 
 class LinkedList():
+    
     def __init__(self):
         self.root = None
         self.size = 0
