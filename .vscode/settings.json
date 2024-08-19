@@ -1,6 +1,7 @@
 {
     "python.analysis.extraPaths": [
         "./Python/BaseClass",
-        "./Python/LinkedList"
+        "./Python/LinkedList",
+        "./Python/Searching"
     ]
 }

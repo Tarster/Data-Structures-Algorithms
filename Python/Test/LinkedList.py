@@ -3,6 +3,7 @@ sys.path.append(r'Python\LinkedList')
 
 from linked_list import LinkedList
 from double_linked_list import DoubleLinkedList
+from circular_linked_list import CircularLinkedList
 import unittest
 
 class LinkedListTest(unittest.TestCase):
@@ -95,10 +96,68 @@ class DoubleLinkedListTest(unittest.TestCase):
         print(my_list.delete(20))
         my_list.printDoubleList() # print 20, 8
 
+
+class CircularLinkedListTest(unittest.TestCase):
+    def test_add(self):
+        print("Testing Add function")
+        my_list = CircularLinkedList()
+        my_list.add(4)
+        my_list.add(2)
+        my_list.add(6)
+        my_list.add(9, pos="back")
+        my_list.print_list()
+    
+    def test_find(self):
+        print("Testing Find function")
+        my_list = CircularLinkedList()
+        my_list.add(4)
+        my_list.add(2)
+        my_list.add(6)
+        my_list.add(9, pos="back")
+        print(my_list.find(6))
+        print(my_list.find(100))
+        # my_list.print_list()
+
+    def test_delete(self):
+        print("Testing Delete function")
+        my_list = CircularLinkedList()
+        my_list.add(4)
+        my_list.add(2)
+        my_list.add(6)
+        my_list.add(9, pos="back")
+        
+        # Delete last
+        print(my_list.delete(9))
+        my_list.print_list()
+        
+        # Delete First
+        print(my_list.delete(6))
+        my_list.print_list()
+        # Delete middle 
+        my_list.add(100) 
+        print(my_list.delete(2))
+        my_list.print_list()
+
+        # Value not present
+        print(my_list.delete(400))
+        
+        # Delete everything
+        print(my_list.delete(4))
+        my_list.print_list()
+        
+        print(my_list.delete(100))
+        my_list.print_list()
+        
+        # Empty list delete
+        print(my_list.delete(3))
+        my_list.print_list()
+
+
 def run_some_tests():
     test_class_to_test = [
                     LinkedListTest, 
-                    DoubleLinkedListTest
+                    DoubleLinkedListTest,
+                    CircularLinkedListTest
                           ] # comment classes here to test individual classes
 
     loader = unittest.TestLoader()
