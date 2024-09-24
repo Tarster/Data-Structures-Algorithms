@@ -19,8 +19,12 @@ class LinkedList():
     
     # Add to the linked list
     def add(self, data):
-        new_node = Node(data, self.root)
+        new_node = Node(data)
+        # Adding node in the front of the list
+        new_node.set_next(self.root)
+        # Set the new node as the root
         self.root = new_node
+        # Increase the size of the list
         self.size += 1
 
     def remove(self, data):
@@ -30,10 +34,11 @@ class LinkedList():
         while this_node:
             if this_node.get_data() == data:
                 if prev_node:
-                    # Get the information which node current node is pointing to and set it as the next node
+                    # Bypass the current node
                     prev_node.set_next(this_node.get_next())
                 else:
-                    self.root = this_node
+                    # Remove the root by pointing it to the next node
+                    self.root = this_node.get_next()
                 self.size -= 1
                 return True
             else:
@@ -59,5 +64,13 @@ class LinkedList():
             print(this_node.get_data(),"-> ", end="")
             this_node = this_node.get_next()
         print("None")
+    
+    def to_list(self):
+        result = []
+        current = self.root
+        while current is not None:
+            result.append(current.data)
+            current = current.next
+        return result
 
 

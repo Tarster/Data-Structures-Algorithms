@@ -78,3 +78,14 @@ class CircularLinkedList(object):
             print(curr_node.get_data(),"-> ",end="")
             curr_node = curr_node.get_next()
         print()
+    
+    def to_list(self):
+        result = []
+        if self.size == 0:
+            return result
+
+        current = self.end.get_next()  # Start from the first node
+        for _ in range(self.size):
+            result.append(current.get_data())
+            current = current.get_next()
+        return result
