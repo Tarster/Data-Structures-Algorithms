@@ -19,12 +19,12 @@ Replace `filename.py` with the name of the file you want to run. Test are writte
     - [Linked List](#linked-list)
       - [Singly Linked List](Python/LinkedList/linked_list.py)
       - [Doubly Linked List](Python/LinkedList/double_linked_list.py)
-      - [Circular Linked List](#circular-linked-list)
+      - [Circular Linked List](Python/LinkedList/circular_linked_list.py)
   
   - [Stack](#stack)
-    - [Linked List Implementation](#linked-list-implementation)
+    - [Linked List Implementation](Python/Stack/stack.py)
   - [Queue](#queue)
-    - [Linked List Implementation](#linked-list-implementation)
+    - [Linked List Implementation](Python/Queue/queue.py)
   - [Tree](#tree)
     - [Binary Tree](#binary-tree)
     - [Binary Search Tree](#binary-search-tree)
@@ -50,9 +50,9 @@ Replace `filename.py` with the name of the file you want to run. Test are writte
 
 ## ALgorithms
 - [Sorting](#sorting)
-  - [Selection Sort](#selection-sort)
-  - [Bubble Sort](#bubble-sort)
-  - [Insertion Sort](#insertion-sort)
+  - [Selection Sort](Python/Sorting/BasicSort.py)
+  - [Bubble Sort](Python/Sorting/BasicSort.py)
+  - [Insertion Sort](Python/Sorting/BasicSort.py)
   - [Merge Sort](#merge-sort)
   - [Quick Sort](#quick-sort)
   - [Heap Sort](#heap-sort)

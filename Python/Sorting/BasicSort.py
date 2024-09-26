@@ -40,5 +40,3 @@ class Searching(object):
             self.array[min], self.array[i] = self.array[i], self. array[min]
             # print("iteration:",i, self.array)
         return self.array
-
-print(Searching([]).insertion_sort())

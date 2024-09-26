@@ -7,6 +7,7 @@ from CircularLinkedListTest import CircularLinkedListTest
 from DoubleLinkedListTest import DoubleLinkedListTest
 from LinkedListTest import LinkedListTest
 from StackTest import SimpleStackTest
+from QueueTest import QueueTest
 
         
 def run_some_tests():
@@ -14,7 +15,8 @@ def run_some_tests():
                     # LinkedListTest, 
                     # DoubleLinkedListTest,
                     # CircularLinkedListTest,
-                    SimpleStackTest
+                    # SimpleStackTest,
+                    QueueTest
                           ] # comment classes here to test individual classes
 
     loader = unittest.TestLoader()
